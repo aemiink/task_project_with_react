@@ -1,11 +1,17 @@
 import './ComCss/taskShow.css'
 import {useState} from "react";
 import TaskCreate from "./TaskCreate";
+import {useContext} from "react";
+import TasksContexts from "../Context/task";
+
 
 function TaskShow({task, onDelete, onUpdate}){
+    const {editTaskById, deleteTaskById} = useContext(TasksContexts)
+
     const [showEdit, setShowEdit] = useState(false)
     const deleteClick = () => {
-        onDelete(task.id)
+        //onDelete(task.id)
+        deleteTaskById(task.id)
     };
 
     const editClick = () => {
@@ -14,7 +20,7 @@ function TaskShow({task, onDelete, onUpdate}){
 
     const handleSubmit = (id, updateTitle, updateDesc) => {
         setShowEdit(false);
-        onUpdate(id, updateTitle, updateDesc);
+        editTaskById(id, updateTitle, updateDesc);
     };
 
     return(
