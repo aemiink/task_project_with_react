@@ -1,8 +1,14 @@
 import './ComCss/taskCreate.css'
 import 'bulma/css/bulma.css'
 import {useState} from "react";
+import {useContext} from "react";
+import TasksContexts from "../Context/task";
 
-function TaskCreate({onCreate, task, taskformUpdate, onUpdate}){
+
+function TaskCreate({task, taskformUpdate, onUpdate}){
+
+    const {editTaskById , createTask} = useContext(TasksContexts)
+
     const [title, setTitle] = useState(task ? task.title : "")
     const [description, setDescription] = useState(task ? task.description : "")
 
@@ -21,7 +27,7 @@ function TaskCreate({onCreate, task, taskformUpdate, onUpdate}){
             onUpdate(task.id, title, description);
         }
         else{
-            onCreate(title, description);
+            createTask(title, description);
         }
         setTitle('');
         setDescription('');
